@@ -6,7 +6,10 @@
   "plugins": [
     {
       "name": "sdd",
-      "source": ".",
+      "source": {
+        "source": "github",
+        "repo": "reposy/sdd-claude-plugin"
+      },
       "description": "Spec-Driven Development plugin for Claude Code (한국어)"
     }
   ]
