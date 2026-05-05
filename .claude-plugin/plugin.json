@@ -1,0 +1,12 @@
+{
+  "name": "sdd",
+  "version": "0.1.0",
+  "description": "Spec-Driven Development plugin for Claude Code. 사용자는 스펙을 깎고, LLM은 묻고 문서화하며, 코드는 스펙의 번역물이 된다.",
+  "author": {
+    "name": "reposy",
+    "email": "hsykys0728@gmail.com"
+  },
+  "repository": "https://github.com/reposy/sdd-claude-plugin",
+  "license": "MIT",
+  "keywords": ["sdd", "spec-driven", "documentation", "workflow", "spec"]
+}
