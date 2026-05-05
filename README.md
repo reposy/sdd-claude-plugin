@@ -12,37 +12,50 @@ Spec-Driven Development(SDD) 방법론을 Claude Code에서 자동 적용하기 
 
 ## 설치
 
-> 전제: [Claude Code](https://claude.com/code)가 설치돼 있어야 한다.
+> 전제: [Claude Code](https://claude.com/code) + `git`. SSH 키, GitHub 계정, 토큰은 필요 없음.
 
-### 1. 아무 디렉터리에서 Claude Code를 연다
+### 1. 저장소를 HTTPS로 clone
 
-빈 디렉터리든 기존 프로젝트든 상관없다.
+원하는 위치에서:
 
 ```bash
-mkdir my-sdd-test && cd my-sdd-test   # 빈 디렉터리 예시
-claude
+git clone https://github.com/reposy/sdd-claude-plugin.git
 ```
 
-### 2. Claude Code 프롬프트에서 다음 3줄을 입력
+HTTPS clone이라 보안 설정 일체 불필요.
+
+### 2. Claude Code 안에서 marketplace 등록 + plugin 설치
+
+아무 디렉터리에서 `claude` 실행 후 (빈 디렉터리도 OK), clone한 **절대 경로**를 marketplace로 추가:
 
 ```
-/plugin marketplace add reposy/sdd-claude-plugin
+/plugin marketplace add /절대/경로/sdd-claude-plugin
 /plugin install sdd@sdd-plugins
 /reload-plugins
 ```
 
+> 절대 경로 예: `/Users/foo/code/sdd-claude-plugin`. clone한 디렉터리 안에서 `pwd`로 확인 가능.
+
 ### 3. 설치 확인
 
-- `/plugin` → **Installed** 탭에 `sdd` 항목이 보이거나
-- `/reload-plugins` 출력에 `Loaded 1 plugins, 13 skills, ...` 라인이 뜨면 성공
+다음 중 하나로 성공 확인:
+- `/reload-plugins` 출력에 `Loaded 1 plugins, 13 skills, ...` 라인
+- `/plugin` → **Installed** 탭에 `sdd` 항목
 
 ### 4. 사용
 
-설치는 user-global이라 한 번만 하면 어떤 프로젝트에서든 13개 `sdd-*` skill이 트리거된다. 새 프로젝트로 옮겨도 재설치 필요 없음.
-
-곧장 `/sdd-init`로 시작하면 된다 (아래 [빠른 시작](#빠른-시작) 참조).
+설치는 user-global이라 어떤 프로젝트에서든 13개 `sdd-*` skill이 즉시 트리거된다. 새 프로젝트로 옮겨도 재설치 필요 없음. 곧장 `/sdd-init`로 시작 (아래 [빠른 시작](#빠른-시작) 참조).
 
 ### 업데이트
+
+clone한 디렉터리에서 최신 받기:
+
+```bash
+cd /절대/경로/sdd-claude-plugin
+git pull
+```
+
+그리고 Claude Code 안에서:
 
 ```
 /plugin marketplace update sdd-plugins
