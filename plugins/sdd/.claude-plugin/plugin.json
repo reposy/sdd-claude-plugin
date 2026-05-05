@@ -6,7 +6,6 @@
     "name": "reposy",
     "email": "hsykys0728@gmail.com"
   },
-  "repository": "https://github.com/reposy/sdd-claude-plugin",
   "license": "MIT",
   "keywords": ["sdd", "spec-driven", "documentation", "workflow", "spec"]
 }
