@@ -1,0 +1,13 @@
+{
+  "name": "sdd-plugins",
+  "owner": {
+    "name": "reposy"
+  },
+  "plugins": [
+    {
+      "name": "sdd",
+      "source": ".",
+      "description": "Spec-Driven Development plugin for Claude Code (한국어)"
+    }
+  ]
+}

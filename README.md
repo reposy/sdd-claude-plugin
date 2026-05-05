@@ -12,17 +12,15 @@ Spec-Driven Development(SDD) 방법론을 Claude Code에서 자동 적용하기 
 
 ## 설치
 
-```bash
-# Claude Code에서
-/plugin
-# → marketplace 추가 → sdd 검색 → install
+Claude Code 안에서:
+
+```
+/plugin marketplace add reposy/sdd-claude-plugin
+/plugin install sdd@sdd-plugins
+/reload-plugins
 ```
 
-또는 GitHub에서 직접:
-
-```bash
-/plugin install github:reposy/sdd-claude-plugin
-```
+설치 확인은 `/plugin`의 **Installed** 탭, 또는 `/reload-plugins` 출력에서 "13 skills" 라인을 본다.
 
 ## 빠른 시작
 
