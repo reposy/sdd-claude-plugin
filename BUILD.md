@@ -79,14 +79,14 @@ for f in plugins/sdd/skills/*/SKILL.md; do head -1 $f | grep -q '^---' || echo "
 
 ### B. Claude Code 설치 검증
 
-```bash
-# 사용자 환경에서 (HTTPS clone, 그 후 로컬 marketplace 등록)
-git clone https://github.com/<owner>/sdd-claude-plugin.git
-# Claude Code 안에서:
-#   /plugin marketplace add /절대/경로/sdd-claude-plugin
-#   /plugin install sdd@sdd-plugins
-#   /reload-plugins   → "Loaded 1 plugins, 13 skills, ..." 라인 확인
 ```
+# Claude Code 안에서:
+/plugin marketplace add <owner>/sdd-claude-plugin
+/plugin install sdd@sdd-plugins
+/reload-plugins   → "Loaded 1 plugins, 13 skills, ..." 라인 확인
+```
+
+만약 SSH 호스트 키 에러가 뜨는 환경이면 README 트러블슈팅 섹션의 `ssh-keyscan` 한 줄 안내. 본 plugin 측에서 추가 우회 처리는 없음 — Claude Code의 plugin install이 git clone을 트리거하기 때문.
 
 ### C. Smoke test
 

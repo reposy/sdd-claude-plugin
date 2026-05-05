@@ -12,54 +12,58 @@ Spec-Driven Development(SDD) 방법론을 Claude Code에서 자동 적용하기 
 
 ## 설치
 
-> 전제: [Claude Code](https://claude.com/code) + `git`. SSH 키, GitHub 계정, 토큰은 필요 없음.
+> 전제: [Claude Code](https://claude.com/code)가 설치돼 있어야 한다.
 
-### 1. 저장소를 HTTPS로 clone
+### 1. 아무 디렉터리에서 Claude Code를 연다
 
-원하는 위치에서:
+빈 디렉터리든 기존 프로젝트든 상관없다.
 
 ```bash
-git clone https://github.com/reposy/sdd-claude-plugin.git
+mkdir my-sdd-test && cd my-sdd-test
+claude
 ```
 
-HTTPS clone이라 보안 설정 일체 불필요.
-
-### 2. Claude Code 안에서 marketplace 등록 + plugin 설치
-
-아무 디렉터리에서 `claude` 실행 후 (빈 디렉터리도 OK), clone한 **절대 경로**를 marketplace로 추가:
+### 2. Claude Code 안에서 다음 3줄을 입력
 
 ```
-/plugin marketplace add /절대/경로/sdd-claude-plugin
+/plugin marketplace add reposy/sdd-claude-plugin
 /plugin install sdd@sdd-plugins
 /reload-plugins
 ```
 
-> 절대 경로 예: `/Users/foo/code/sdd-claude-plugin`. clone한 디렉터리 안에서 `pwd`로 확인 가능.
+설치 도중 scope 선택 화면이 뜨면 **Install for you (user scope)** 선택.
 
 ### 3. 설치 확인
 
-다음 중 하나로 성공 확인:
-- `/reload-plugins` 출력에 `Loaded 1 plugins, 13 skills, ...` 라인
-- `/plugin` → **Installed** 탭에 `sdd` 항목
+- `/reload-plugins` 출력에 `Loaded 1 plugins, 13 skills, ...` 라인이 뜨거나
+- `/plugin` → **Installed** 탭에 `sdd` 항목이 보이면 성공
 
 ### 4. 사용
 
-설치는 user-global이라 어떤 프로젝트에서든 13개 `sdd-*` skill이 즉시 트리거된다. 새 프로젝트로 옮겨도 재설치 필요 없음. 곧장 `/sdd-init`로 시작 (아래 [빠른 시작](#빠른-시작) 참조).
+User-global 설치라 어떤 프로젝트에서든 13개 `sdd-*` skill이 즉시 트리거된다. 새 프로젝트로 옮겨도 재설치 필요 없음. 곧장 `/sdd-init`로 시작 (아래 [빠른 시작](#빠른-시작) 참조).
 
 ### 업데이트
-
-clone한 디렉터리에서 최신 받기:
-
-```bash
-cd /절대/경로/sdd-claude-plugin
-git pull
-```
-
-그리고 Claude Code 안에서:
 
 ```
 /plugin marketplace update sdd-plugins
 ```
+
+### 트러블슈팅: `Host key verification failed`
+
+`/plugin install` 단계에서 다음 에러가 뜨면:
+
+```
+No ED25519 host key is known for github.com and you have requested strict checking.
+Host key verification failed.
+```
+
+당신의 `~/.ssh/known_hosts`에 GitHub 호스트 키가 없는 상태(GitHub로 SSH 통신을 한 번도 안 한 환경). 터미널에서 한 번만:
+
+```bash
+ssh-keyscan -t rsa,ecdsa,ed25519 github.com >> ~/.ssh/known_hosts
+```
+
+후 `/plugin install sdd@sdd-plugins` 재시도. (참고: GitHub 공식 호스트 키 fingerprint는 [공식 문서](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)에서 확인 가능.)
 
 ## 빠른 시작
 
